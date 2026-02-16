@@ -63,6 +63,7 @@ if (skillsSection) {
                 progressBars.forEach(bar => {
                     const progress = bar.getAttribute('data-progress'); // Obtém o valor de progresso do atributo data-progress
                     bar.style.width = progress + '%'; // Define a largura da barra para animar
+                    bar.classList.add('active'); // Adiciona a classe 'active' para garantir a transição
                 });
                 observer.unobserve(entry.target); // Desconecta o observador após animar para evitar re-animações
             }
@@ -71,26 +72,38 @@ if (skillsSection) {
 
     // Cria um Intersection Observer para monitorar a visibilidade da secção de competências
     const skillObserver = new IntersectionObserver(animateSkills, {
-        threshold: 0.4, // Inicia a animação quando 40% da secção está visível
-        rootMargin: '0px 0px -50px 0px' // Começa a observar um pouco antes de entrar na tela (50px antes do fim da viewport)
+        threshold: 0.2,              // Deixa mais sensível: inicia a animação quando 20% da secção está visível
+        rootMargin: '0px 0px -20px 0px' // Facilita ainda mais o disparo no mobile, observando um pouco antes
     });
 
     skillObserver.observe(skillsSection); // Começa a observar a secção de competências
+
+    // Fallback: se IntersectionObserver não for suportado, aplica as larguras direto
+    if (!('IntersectionObserver' in window)) {
+        const progressBars = skillsSection.querySelectorAll('.skill-progress');
+        progressBars.forEach(bar => {
+            const progress = bar.getAttribute('data-progress');
+            bar.style.width = progress + '%';
+            bar.classList.add('active');
+        });
+    }
 }
 
 // ========================================
-// EFEITO DE DIGITAÇÃO NO TÍTULO HERO (AJUSTADO)
+// EFEITO DE DIGITAÇÃO NO TÍTULO HERO
 // ========================================
 const typingEffectElement = document.querySelector('.typing-effect');
 
+// Verifica se o elemento de digitação existe
 if (typingEffectElement) {
     const textToType = typingEffectElement.getAttribute('data-text'); // Ex: "Olá, sou o Maurício Ito"
     const nameToHighlight = 'Maurício Ito'; // Nome a destacar
     const nameStart = textToType.indexOf(nameToHighlight); // Posição onde o nome começa
-    let i = 0;
-    let currentText = '';
-    const typingSpeed = 100; // Velocidade de digitação (ms)
+    let i = 0; // Contador para a posição do caractere
+    let currentText = ''; // Texto atualmente exibido
+    const typingSpeed = 100; // Velocidade de digitação (ms por caractere)
 
+    // Função principal do efeito de digitação
     function typeWriter() {
         currentText = textToType.substring(0, i + 1);
 
@@ -110,16 +123,18 @@ if (typingEffectElement) {
             typingEffectElement.innerHTML = `<span>${currentText}</span>`;
         }
 
+        // Continua digitando se ainda houver caracteres
         if (i < textToType.length - 1) {
             i++;
             setTimeout(typeWriter, typingSpeed);
         } else {
-            // Terminou de digitar
+            // Terminou de digitar: adiciona classes para o efeito de salto e brilho, e remove o cursor
             typingEffectElement.classList.add('finished-typing');
             typingEffectElement.classList.add('no-cursor');
         }
     }
 
+    // Inicia o efeito de digitação após um pequeno atraso inicial
     setTimeout(typeWriter, 500);
 }
 
@@ -278,11 +293,14 @@ if (certificatesCarousel && certPrev && certNext) {
 }
 
 // ========================================
-// EFEITO "VER" EM CERTIFICADOS (PARA DISPOSITIVOS TOUCH)
+// EFEITO "VER" EM CERTIFICADOS (PARA DISPOSITIVOS TOUCH E DESKTOP)
 // ========================================
 const certificateItems = document.querySelectorAll('.certificate-item');
 // Detecta se o dispositivo é touch
-const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+const isTouchDevice =
+    'ontouchstart' in window ||
+    navigator.maxTouchPoints > 0 ||
+    navigator.msMaxTouchPoints > 0;
 
 // Aplica a lógica apenas se houver itens de certificado
 if (certificateItems.length > 0) {
@@ -290,42 +308,34 @@ if (certificateItems.length > 0) {
         let activeCertificate = null; // Variável para controlar qual certificado está "ativo" (overlay visível)
 
         certificateItems.forEach(item => {
-            const link = item.querySelector('.certificate-link');
-            const originalHref = link.href; // Guarda o link original do certificado
-
-            // Previne o comportamento padrão do link no primeiro toque para exibir o overlay
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-            });
-
             // Listener para o evento 'touchstart' (primeiro toque)
             item.addEventListener('touchstart', (e) => {
                 // Se já houver um certificado ativo e não for este, desativa o anterior
                 if (activeCertificate && activeCertificate !== item) {
                     activeCertificate.classList.remove('active');
+                    activeCertificate = null;
                 }
 
-                // Se este certificado já estiver ativo, significa que é o segundo toque
+                // Se este já estiver ativo, significa que é o segundo toque.
+                // Não fazemos preventDefault para permitir que o link abra normalmente.
                 if (item.classList.contains('active')) {
-                    // Segundo toque: acessa o link original em uma nova aba
-                    window.open(originalHref, '_blank');
-                    item.classList.remove('active'); // Desativa o overlay após abrir o link
-                    activeCertificate = null;
+                    activeCertificate = null; // Reseta o certificado ativo após o segundo toque
                 } else {
-                    // Primeiro toque: exibe o overlay "Ver"
+                    // Primeiro toque: apenas ativa o overlay e bloqueia a navegação padrão do link
+                    e.preventDefault();
                     item.classList.add('active');
                     activeCertificate = item;
                 }
-            });
+            }, { passive: false }); // passive: false é necessário para que preventDefault funcione
 
-            // Adiciona um listener global para fechar o overlay se tocar fora do certificado ativo
+            // Fecha o overlay se tocar fora
             document.addEventListener('touchstart', (e) => {
                 // Verifica se há um certificado ativo e se o toque não foi dentro dele
                 if (activeCertificate && !activeCertificate.contains(e.target)) {
                     activeCertificate.classList.remove('active');
                     activeCertificate = null;
                 }
-            });
+            }, { passive: true }); // passive: true para melhor performance em toques que não precisam de preventDefault
         });
     } else {
         // Para dispositivos não-touch (desktop), o efeito hover já é tratado via CSS.
