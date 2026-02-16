@@ -4,38 +4,37 @@
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('navLinks');
 
-// Verifica se os elementos existem antes de adicionar event listeners
+// Verifica se os elementos do hamburger e dos links de navegação existem
 if (hamburger && navLinks) {
     // Adiciona um listener para o clique no ícone hamburger
     hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active'); // Alterna a classe 'active' para mostrar/esconder o menu
-        hamburger.classList.toggle('active'); // Alterna a classe 'active' para animar o ícone
-        document.body.classList.toggle('no-scroll'); // Impede o scroll no body quando o menu mobile está aberto
+        navLinks.classList.toggle('active'); // Ativa/desativa a visibilidade dos links
+        hamburger.classList.toggle('active'); // Ativa/desativa a animação do ícone hamburger
+        document.body.classList.toggle('no-scroll'); // Impede o scroll do body quando o menu mobile está aberto
     });
 
-    // Fecha o menu ao clicar em um link de navegação
+    // Fecha o menu ao clicar em um link (para melhor UX em mobile)
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            navLinks.classList.remove('active'); // Esconde o menu
-            hamburger.classList.remove('active'); // Desativa a animação do ícone
-            document.body.classList.remove('no-scroll'); // Permite o scroll novamente
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+            document.body.classList.remove('no-scroll');
         });
     });
 }
 
 // ========================================
-// SCROLL SUAVE PARA LINKS ÂNCORA
+// SCROLL SUAVE PARA ÂNCORAS
 // ========================================
-// Seleciona todos os links que começam com '#' (âncoras)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault(); // Previne o comportamento padrão do link (salto imediato)
 
-        const targetId = this.getAttribute('href'); // Obtém o ID do destino (ex: #home)
-        const target = document.querySelector(targetId); // Seleciona o elemento de destino
+        const targetId = this.getAttribute('href'); // Obtém o ID do alvo (ex: "#about")
+        const target = document.querySelector(targetId); // Seleciona o elemento alvo
 
         if (target) {
-            // Ajusta a posição do scroll para considerar a altura da navbar fixa
+            // Calcula a posição do alvo, ajustando para a altura da navbar fixa
             const navbarHeight = document.querySelector('.navbar').offsetHeight;
             const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
 
@@ -69,24 +68,23 @@ if (skillsSection) {
         const animateSkills = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    fillSkillBars();
-                    observer.unobserve(entry.target);
+                    fillSkillBars(); // Chama a função para preencher as barras
+                    observer.unobserve(entry.target); // Desconecta o observador após animar para evitar re-animações
                 }
             });
         };
 
         const skillObserver = new IntersectionObserver(animateSkills, {
-            threshold: 0.2,
-            rootMargin: '0px 0px -20px 0px'
+            threshold: 0.2, // Inicia a animação quando 20% da secção está visível
+            rootMargin: '0px 0px -20px 0px' // Começa a observar um pouco antes de entrar na tela
         });
 
-        skillObserver.observe(skillsSection);
+        skillObserver.observe(skillsSection); // Começa a observar a secção de competências
     } else {
-        // Fallback: se não suportar IntersectionObserver, já preenche de cara
+        // Fallback para navegadores sem IntersectionObserver: preenche as barras imediatamente
         fillSkillBars();
     }
 }
-
 
 // ========================================
 // EFEITO DE DIGITAÇÃO NO TÍTULO HERO
@@ -255,8 +253,9 @@ if (navbar) {
 }
 
 // ========================================
-// CAROUSEL DE CERTIFICADOS
+// CAROUSEL DE CERTIFICADOS (NAVEGAÇÃO)
 // ========================================
+// Declaramos certificatesCarousel aqui, no escopo global, para ser usado em múltiplos blocos
 const certificatesCarousel = document.querySelector('.certificates-carousel');
 const certPrev = document.getElementById('certPrev');
 const certNext = document.getElementById('certNext');
@@ -292,9 +291,12 @@ if (certificatesCarousel && certPrev && certNext) {
 }
 
 // ========================================
-// EFEITO "VER" EM CERTIFICADOS (MOBILE E DESKTOP)
+// EFEITO "VER" EM CERTIFICADOS (MOBILE E DESKTOP) & INDICADOR DE SCROLL
 // ========================================
 const certificateItems = document.querySelectorAll('.certificate-item');
+// A variável 'certificatesCarousel' já foi declarada acima, então não a redeclaramos aqui.
+const scrollIndicator = document.getElementById('scrollIndicator'); // Pega a seta de scroll
+
 const isTouchDevice =
     'ontouchstart' in window ||
     navigator.maxTouchPoints > 0 ||
@@ -305,40 +307,67 @@ if (certificateItems.length > 0) {
         let activeCertificate = null;
 
         certificateItems.forEach(item => {
-            const link = item.querySelector('.certificate-link');
-
-            // No mobile vamos trabalhar apenas com o toque no ITEM
-            item.addEventListener('touchstart', (e) => {
+            // Usamos 'click' para o primeiro toque/clique no mobile
+            // Isso garante que o overlay só apareça ao interagir intencionalmente
+            item.addEventListener('click', (e) => {
                 // Se já houver outro ativo e não for este, fecha o anterior
                 if (activeCertificate && activeCertificate !== item) {
                     activeCertificate.classList.remove('active');
                     activeCertificate = null;
                 }
 
-                // Se este já estiver ativo, é o segundo toque: deixa o link funcionar normalmente
+                // Se este já estiver ativo, é o segundo clique: deixa o link funcionar normalmente
                 if (item.classList.contains('active')) {
                     activeCertificate = null;
-                    // NÃO chamamos preventDefault aqui — o <a> abre o PDF
+                    // O evento de clique padrão do <a> vai acontecer
                 } else {
-                    // Primeiro toque: só mostra o overlay e bloqueia a navegação
-                    e.preventDefault();
+                    // Primeiro clique: só mostra o overlay e bloqueia a navegação
+                    e.preventDefault(); // Impede que o link abra no primeiro clique
                     item.classList.add('active');
                     activeCertificate = item;
                 }
-            }, { passive: false });
+            });
 
-            // Fecha o overlay tocando fora
-            document.addEventListener('touchstart', (e) => {
+            // Fecha o overlay clicando fora
+            document.addEventListener('click', (e) => {
                 if (activeCertificate && !activeCertificate.contains(e.target)) {
                     activeCertificate.classList.remove('active');
                     activeCertificate = null;
                 }
-            }, { passive: true });
+            });
         });
+
+        // Lógica para esconder a seta de scroll quando o usuário rolar o carrossel
+        if (certificatesCarousel && scrollIndicator) {
+            let scrollTimeout;
+            certificatesCarousel.addEventListener('scroll', () => {
+                scrollIndicator.style.opacity = '0'; // Esconde a seta ao começar a rolar
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    // Se o carrossel não estiver no início, esconde a seta permanentemente
+                    // Ou pode reaparecer se voltar ao início, dependendo da UX desejada
+                    if (certificatesCarousel.scrollLeft > 0) {
+                        scrollIndicator.style.display = 'none';
+                    } else {
+                        scrollIndicator.style.opacity = '0.8'; // Reaparece se voltar ao início
+                    }
+                }, 1500); // Esconde após 1.5s de inatividade no scroll
+            });
+
+            // Oculta a seta se o carrossel já estiver rolado na carga da página
+            if (certificatesCarousel.scrollLeft > 0) {
+                scrollIndicator.style.display = 'none';
+            }
+        }
+
     } else {
         // Desktop: hover + clique normal
         certificateItems.forEach(item => {
             item.classList.add('no-touch');
         });
+        // Esconde a seta de scroll no desktop
+        if (scrollIndicator) {
+            scrollIndicator.style.display = 'none';
+        }
     }
 }
