@@ -53,41 +53,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ========================================
 const skillsSection = document.querySelector('.skills');
 
-// Verifica se a secção de competências existe
 if (skillsSection) {
-    // Função que será chamada quando a secção de competências entrar na viewport
-    const animateSkills = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) { // Se a secção estiver visível
-                const progressBars = entry.target.querySelectorAll('.skill-progress');
-                progressBars.forEach(bar => {
-                    const progress = bar.getAttribute('data-progress'); // Obtém o valor de progresso do atributo data-progress
-                    bar.style.width = progress + '%'; // Define a largura da barra para animar
-                    bar.classList.add('active'); // Adiciona a classe 'active' para garantir a transição
-                });
-                observer.unobserve(entry.target); // Desconecta o observador após animar para evitar re-animações
-            }
-        });
-    };
+    const progressBars = skillsSection.querySelectorAll('.skill-progress');
 
-    // Cria um Intersection Observer para monitorar a visibilidade da secção de competências
-    const skillObserver = new IntersectionObserver(animateSkills, {
-        threshold: 0.2,              // Deixa mais sensível: inicia a animação quando 20% da secção está visível
-        rootMargin: '0px 0px -20px 0px' // Facilita ainda mais o disparo no mobile, observando um pouco antes
-    });
-
-    skillObserver.observe(skillsSection); // Começa a observar a secção de competências
-
-    // Fallback: se IntersectionObserver não for suportado, aplica as larguras direto
-    if (!('IntersectionObserver' in window)) {
-        const progressBars = skillsSection.querySelectorAll('.skill-progress');
+    // Função que aplica as larguras das barras
+    const fillSkillBars = () => {
         progressBars.forEach(bar => {
             const progress = bar.getAttribute('data-progress');
             bar.style.width = progress + '%';
-            bar.classList.add('active');
         });
+    };
+
+    // Se IntersectionObserver existir, usa animação ao entrar na tela
+    if ('IntersectionObserver' in window) {
+        const animateSkills = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    fillSkillBars();
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const skillObserver = new IntersectionObserver(animateSkills, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -20px 0px'
+        });
+
+        skillObserver.observe(skillsSection);
+    } else {
+        // Fallback: se não suportar IntersectionObserver, já preenche de cara
+        fillSkillBars();
     }
 }
+
 
 // ========================================
 // EFEITO DE DIGITAÇÃO NO TÍTULO HERO
@@ -293,53 +292,51 @@ if (certificatesCarousel && certPrev && certNext) {
 }
 
 // ========================================
-// EFEITO "VER" EM CERTIFICADOS (PARA DISPOSITIVOS TOUCH E DESKTOP)
+// EFEITO "VER" EM CERTIFICADOS (MOBILE E DESKTOP)
 // ========================================
 const certificateItems = document.querySelectorAll('.certificate-item');
-// Detecta se o dispositivo é touch
 const isTouchDevice =
     'ontouchstart' in window ||
     navigator.maxTouchPoints > 0 ||
     navigator.msMaxTouchPoints > 0;
 
-// Aplica a lógica apenas se houver itens de certificado
 if (certificateItems.length > 0) {
     if (isTouchDevice) {
-        let activeCertificate = null; // Variável para controlar qual certificado está "ativo" (overlay visível)
+        let activeCertificate = null;
 
         certificateItems.forEach(item => {
-            // Listener para o evento 'touchstart' (primeiro toque)
+            const link = item.querySelector('.certificate-link');
+
+            // No mobile vamos trabalhar apenas com o toque no ITEM
             item.addEventListener('touchstart', (e) => {
-                // Se já houver um certificado ativo e não for este, desativa o anterior
+                // Se já houver outro ativo e não for este, fecha o anterior
                 if (activeCertificate && activeCertificate !== item) {
                     activeCertificate.classList.remove('active');
                     activeCertificate = null;
                 }
 
-                // Se este já estiver ativo, significa que é o segundo toque.
-                // Não fazemos preventDefault para permitir que o link abra normalmente.
+                // Se este já estiver ativo, é o segundo toque: deixa o link funcionar normalmente
                 if (item.classList.contains('active')) {
-                    activeCertificate = null; // Reseta o certificado ativo após o segundo toque
+                    activeCertificate = null;
+                    // NÃO chamamos preventDefault aqui — o <a> abre o PDF
                 } else {
-                    // Primeiro toque: apenas ativa o overlay e bloqueia a navegação padrão do link
+                    // Primeiro toque: só mostra o overlay e bloqueia a navegação
                     e.preventDefault();
                     item.classList.add('active');
                     activeCertificate = item;
                 }
-            }, { passive: false }); // passive: false é necessário para que preventDefault funcione
+            }, { passive: false });
 
-            // Fecha o overlay se tocar fora
+            // Fecha o overlay tocando fora
             document.addEventListener('touchstart', (e) => {
-                // Verifica se há um certificado ativo e se o toque não foi dentro dele
                 if (activeCertificate && !activeCertificate.contains(e.target)) {
                     activeCertificate.classList.remove('active');
                     activeCertificate = null;
                 }
-            }, { passive: true }); // passive: true para melhor performance em toques que não precisam de preventDefault
+            }, { passive: true });
         });
     } else {
-        // Para dispositivos não-touch (desktop), o efeito hover já é tratado via CSS.
-        // Adiciona uma classe para indicar que não é touch, se necessário para estilos específicos.
+        // Desktop: hover + clique normal
         certificateItems.forEach(item => {
             item.classList.add('no-touch');
         });
