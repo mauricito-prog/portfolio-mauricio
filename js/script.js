@@ -295,7 +295,7 @@ if (certificatesCarousel && certPrev && certNext) {
 // ========================================
 const certificateItems = document.querySelectorAll('.certificate-item');
 // A variável 'certificatesCarousel' já foi declarada acima, então não a redeclaramos aqui.
-const scrollIndicator = document.getElementById('scrollIndicator'); // Pega a seta de scroll
+// Removido scrollIndicator pois não está no HTML e não é essencial para a funcionalidade principal.
 
 const isTouchDevice =
     'ontouchstart' in window ||
@@ -337,37 +337,14 @@ if (certificateItems.length > 0) {
             });
         });
 
-        // Lógica para esconder a seta de scroll quando o usuário rolar o carrossel
-        if (certificatesCarousel && scrollIndicator) {
-            let scrollTimeout;
-            certificatesCarousel.addEventListener('scroll', () => {
-                scrollIndicator.style.opacity = '0'; // Esconde a seta ao começar a rolar
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                    // Se o carrossel não estiver no início, esconde a seta permanentemente
-                    // Ou pode reaparecer se voltar ao início, dependendo da UX desejada
-                    if (certificatesCarousel.scrollLeft > 0) {
-                        scrollIndicator.style.display = 'none';
-                    } else {
-                        scrollIndicator.style.opacity = '0.8'; // Reaparece se voltar ao início
-                    }
-                }, 1500); // Esconde após 1.5s de inatividade no scroll
-            });
-
-            // Oculta a seta se o carrossel já estiver rolado na carga da página
-            if (certificatesCarousel.scrollLeft > 0) {
-                scrollIndicator.style.display = 'none';
-            }
-        }
+        // Removida a lógica do scrollIndicator, pois o elemento não existe no HTML fornecido.
+        // Se você quiser um indicador de scroll, precisará adicioná-lo ao HTML.
 
     } else {
         // Desktop: hover + clique normal
         certificateItems.forEach(item => {
             item.classList.add('no-touch');
         });
-        // Esconde a seta de scroll no desktop
-        if (scrollIndicator) {
-            scrollIndicator.style.display = 'none';
-        }
+        // Removida a lógica do scrollIndicator, pois o elemento não existe no HTML fornecido.
     }
 }
