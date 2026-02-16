@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
@@ -6,23 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portefólio profissional de Maurício - Programador Iniciante">
     <title>Maurício | Portefólio</title>
-       <link rel="stylesheet" href="css/style.css">
+    <!-- Link para o arquivo CSS principal do projeto -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Link para a biblioteca Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navegação -->
+    <!-- Início da secção de Navegação Principal -->
     <nav class="navbar">
         <div class="container">
+            <!-- Logotipo ou Foto de Perfil na Navbar -->
             <div class="logo">
-                <h2><Maurício/></h2>
+                 <div class="profile-photo-wrapper">
+                    <img src="imagens/mauricio.png" alt="Foto de Perfil de Mauricio">
+                </div>
             </div>
+            <!-- Links de Navegação para as secções da página -->
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Início</a></li>
                 <li><a href="#about">Sobre</a></li>
                 <li><a href="#skills">Competências</a></li>
+                <li><a href="#certificates">Certificados</a></li>
                 <li><a href="#projects">Projectos</a></li>
                 <li><a href="#contact">Contacto</a></li>
             </ul>
+            <!-- Ícone Hamburger para navegação em dispositivos móveis -->
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
@@ -30,12 +37,17 @@
             </div>
         </div>
     </nav>
-    <!-- Secção Hero -->
+    <!-- Fim da secção de Navegação Principal -->
+
+    <!-- Início da Secção Hero (Banner Principal) -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="glitch" data-text="Olá, sou o Mauricio">Olá, sou o Mauricio Ito</h1>
+                <!-- Título principal com efeito de digitação e destaque do nome -->
+                <h1 class="typing-effect" data-text="Olá, sou o Mauricio Ito"></h1>
+                <!-- Subtítulo descritivo -->
                 <p class="subtitle">Programador Iniciante | Apaixonado por Tecnologia</p>
+                <!-- Botões de Chamada para Ação (CTA) -->
                 <div class="cta-buttons">
                     <a href="#projects" class="btn btn-primary">Ver Projectos</a>
                     <a href="#contact" class="btn btn-secondary">Contactar</a>
@@ -43,7 +55,9 @@
             </div>
         </div>
     </section>
-    <!-- Sobre Mim -->
+    <!-- Fim da Secção Hero -->
+
+    <!-- Início da Secção "Sobre Mim" -->
     <section id="about" class="about">
         <div class="container">
             <h2 class="section-title">Sobre Mim</h2>
@@ -70,259 +84,576 @@
             </div>
         </div>
     </section>
-    <!-- Competências -->
+    <!-- Fim da Secção "Sobre Mim" -->
+
+    <!-- Início da Secção de Competências Técnicas -->
     <section id="skills" class="skills">
         <div class="container">
             <h2 class="section-title">Competências Técnicas</h2>
             <div class="skills-grid">
+                <!-- Cartão de Competência: HTML -->
                 <div class="skill-card">
-                    <i class="fab fa-html5"></i>
+                    <div class="skill-icon-wrapper">
+                        <i class="fab fa-html5"></i>
+                    </div>
                     <h3>HTML</h3>
                     <div class="skill-bar">
                         <div class="skill-progress" data-progress="60"></div>
                     </div>
                 </div>
+                <!-- Cartão de Competência: CSS -->
                 <div class="skill-card">
-                    <i class="fab fa-css3-alt"></i>
+                    <div class="skill-icon-wrapper">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
                     <h3>CSS</h3>
                     <div class="skill-bar">
-                        <div class="skill-progress" data-progress="55"></div>
+                        <div class="skill-progress" data-progress="50"></div>
                     </div>
                 </div>
+                <!-- Cartão de Competência: Python -->
                 <div class="skill-card">
-                    <i class="fab fa-python"></i>
+                    <div class="skill-icon-wrapper">
+                        <i class="fab fa-python"></i>
+                    </div>
                     <h3>Python</h3>
                     <div class="skill-bar">
                         <div class="skill-progress" data-progress="50"></div>
                     </div>
                 </div>
+                <!-- Cartão de Competência: JavaScript -->
                 <div class="skill-card">
-                    <i class="fab fa-js"></i>
-                    <h3>JavaScript</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-progress="55"></div>
+                    <div class="skill-icon-wrapper">
+                        <i class="fab fa-js"></i>
                     </div>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-js"></i>
-                    <h3>TypeScript</h3>
+                    <h3>JavaScript</h3>
                     <div class="skill-bar">
                         <div class="skill-progress" data-progress="50"></div>
                     </div>
                 </div>
+                <!-- Cartão de Competência: TypeScript -->
                 <div class="skill-card">
-                    <i class="fas fa-code"></i>
+                    <div class="skill-icon-wrapper">
+                        <!-- Ícone de JS para TypeScript, pode ser ajustado se houver um ícone específico preferido -->
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <h3>TypeScript</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="40"></div>
+                    </div>
+                </div>
+                <!-- Cartão de Competência: C# -->
+                <div class="skill-card">
+                    <div class="skill-icon-wrapper">
+                        <i class="fas fa-code"></i>
+                    </div>
                     <h3>C#</h3>
                     <div class="skill-bar">
                         <div class="skill-progress" data-progress="40"></div>
                     </div>
                 </div>
+                <!-- Cartão de Competência: Git -->
                 <div class="skill-card">
-                    <i class="fab fa-git-alt"></i>
+                    <div class="skill-icon-wrapper">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
                     <h3>Git</h3>
                     <div class="skill-bar">
                         <div class="skill-progress" data-progress="60"></div>
                     </div>
                 </div>
+                <!-- Cartão de Competência: GitHub -->
                 <div class="skill-card">
-                    <i class="fab fa-github"></i>
+                    <div class="skill-icon-wrapper">
+                        <i class="fab fa-github"></i>
+                    </div>
                     <h3>GitHub</h3>
                     <div class="skill-bar">
                         <div class="skill-progress" data-progress="60"></div>
                     </div>
                 </div>
+                <!-- Novas Competências Adicionadas -->
+                <!-- Cartão de Competência: Redes -->
+                <div class="skill-card">
+                    <div class="skill-icon-wrapper">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Redes</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="60"></div>
+                    </div>
+                </div>
+                <!-- Cartão de Competência: Hardware -->
+                <div class="skill-card">
+                    <div class="skill-icon-wrapper">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>Hardware</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="60"></div>
+                    </div>
+                </div>
+                <!-- Cartão de Competência: Docker -->
+                <div class="skill-card">
+                    <div class="skill-icon-wrapper">
+                        <i class="fab fa-docker"></i>
+                    </div>
+                    <h3>Docker</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="50"></div>
+                    </div>
+                </div>
+                <!-- Cartão de Competência: SQL -->
+                <div class="skill-card">
+                    <div class="skill-icon-wrapper">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>SQL</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="35"></div>
+                    </div>
+                </div>
+                <!-- Fim das Novas Competências -->
             </div>
         </div>
     </section>
-    <!-- Projectos -->
-<section id="projects" class="projects">
-    <div class="container">
-        <h2 class="section-title">Projectos</h2>
-        <div class="projects-grid">
+    <!-- Fim da Secção de Competências Técnicas -->
 
-            <!-- Projecto 1 -->
-            <div class="project-card">
-                <div class="project-image" style="background: linear-gradient(135deg, #00d9ff, #7000ff);">
-                    <span>Website Pessoal</span>
-                    <div class="project-overlay">
-                        <a href="https://github.com/mauricito-prog/portfolio-mauricio" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i>
+    <!-- Início da Secção de Certificados e Diplomas -->
+    <section id="certificates" class="certificates">
+        <div class="container">
+            <h2 class="section-title">Certificados & Diplomas</h2>
+            <!-- Wrapper para o carrossel de certificados e botões de navegação -->
+            <div class="certificates-wrapper">
+                <button class="carousel-prev cert-btn" id="certPrev"><i class="fas fa-chevron-left"></i></button>
+                <div class="certificates-carousel">
+                    <!-- Grupo 1: Diploma e Mapa de Aulas -->
+                    <div class="certificate-item">
+                        <a href="certificados/diploma-analise-desenvolvimento-sistemas-estacio.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <p>Diploma - Análise e Desenvolvimento de Sistemas</p>
+                            <!-- Overlay "Ver" para interação visual -->
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/Mapa de Aulas-analise-desenvolvimento-sistemas-estacio.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fas fa-map"></i>
+                            </div>
+                            <p>Mapa de Aulas - Análise e Desenvolvimento de Sistemas</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Grupo 2: Redes e Infraestrutura -->
+                    <div class="certificate-item">
+                        <a href="certificados/infraestrutura-redes.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <p>Conceito e Infraestrutura de Redes</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/implementação-gerenciamento-windows7.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fab fa-windows"></i>
+                            </div>
+                            <p>Implementação e Gerenciamento - Windows 7</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/windows-server-2008-parte2.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fab fa-windows"></i>
+                            </div>
+                            <p>Princípios de Infraestrutura de Rede no Windows Server 2008</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/windows-server-2008-parte1.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fab fa-windows"></i>
+                            </div>
+                            <p>Gerenciamento de Rede no Windows Server 2008</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Grupo 3: Fundamentos de Web: HTML, CSS e HTTP -->
+                    <div class="certificate-item">
+                        <a href="certificados/http-Alura.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <p>HTTP - Entendendo a Web</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/html-css3-parte1-alura.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <p>HTML5 e CSS3 - Parte 1</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/html-css3-parte2-alura.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <p>HTML5 e CSS3 - Parte 2</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/html-css3-parte3-alura.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <p>HTML5 e CSS3 - Parte 3</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/html-css3-parte4-alura.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <p>HTML5 e CSS3 - Parte 4</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/Flexbox-Alura.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fab fa-css3-alt"></i>
+                            </div>
+                            <p>CSS Flexbox - Layouts Responsivos</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/Figma-Alura.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fab fa-figma"></i>
+                            </div>
+                            <p>Figma - Design de Interfaces</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Grupo 4: Acessibilidade -->
+                    <div class="certificate-item">
+                        <a href="certificados/acessibilidade-web-parte1-alura.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fas fa-universal-access"></i>
+                            </div>
+                            <p>Acessibilidade Web - Parte 1</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/acessibilidade-web-parte2-alura.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fas fa-universal-access"></i>
+                            </div>
+                            <p>Acessibilidade Web - Parte 2</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Grupo 5: JavaScript -->
+                    <div class="certificate-item">
+                        <a href="certificados/javascript-alura.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <p>JavaScript - Lógica de Programação</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Grupo 6: Git & GitHub -->
+                    <div class="certificate-item">
+                        <a href="certificados/git-github-alura.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="fab fa-git-alt"></i>
+                            </div>
+                            <p>Git & GitHub - Controle e Compartilhe seu Código</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Grupo 7: Excel, Dashboards e Automação -->
+                    <div class="certificate-item">
+                        <a href="certificados/excel-dashboard.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="far fa-file-excel"></i>
+                            </div>
+                            <p>Excel - Tabelas Dinâmicas & Dashboards</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/excel-macros-automacao.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="far fa-file-excel"></i>
+                            </div>
+                            <p>Excel - Criação de Macros & Automação</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="certificate-item">
+                        <a href="certificados/excel-vba.pdf"
+                           target="_blank" class="certificate-link">
+                            <div class="certificate-icon">
+                                <i class="far fa-file-excel"></i>
+                            </div>
+                            <p>Excel - Personalização e VBA</p>
+                            <div class="certificate-overlay">
+                                <span>Ver</span>
+                            </div>
                         </a>
                     </div>
                 </div>
-                <div class="project-info">
-                    <p>Website responsivo desenvolvido com HTML, CSS e JavaScript.</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JavaScript</span>
-                    </div>
-                </div>
+                <button class="carousel-next cert-btn" id="certNext"><i class="fas fa-chevron-right"></i></button>
             </div>
-
-            <!-- Projecto 2 -->
-            <div class="project-card">
-                <div class="project-image" style="background: linear-gradient(135deg, #7000ff, #00d9ff);">
-                    <span>Calculadora Python</span>
-                    <div class="project-overlay">
-                        <a href="https://github.com/mauricito-prog/Calculadora-simples-Python/blob/main/calculadora.py" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <p>Calculadora simples desenvolvida em Python com interface gráfica.</p>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Projecto 3 -->
-            <div class="project-card">
-                <div class="project-image" style="background: linear-gradient(135deg, #00d9ff, #7000ff);">
-                    <span>To-Do List App</span>
-                    <div class="project-overlay">
-                        <a href="https://mauricito-prog.github.io/TodoListTS/" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <p>Aplicação de lista de tarefas com TypeScript e armazenamento local.</p>
-                    <div class="project-tags">
-                        <span class="tag">TypeScript</span>
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Projecto 4 -->
-            <div class="project-card">
-                <div class="project-image" style="background: linear-gradient(135deg, #7000ff, #00d9ff);">
-                    <span>Sistema de Gestão</span>
-                    <div class="project-overlay">
-                        <a href="https://github.com/projecto4" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <p>Sistema básico de gestão desenvolvido em C# com Windows Forms.</p>
-                    <div class="project-tags">
-                        <span class="tag">C#</span>
-                        <span class="tag">.NET</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Projecto 5 -->
-            <div class="project-card">
-                <div class="project-image" style="background: linear-gradient(135deg, #00d9ff, #7000ff);">
-                    <span>API REST</span>
-                    <div class="project-overlay">
-                        <a href="https://github.com/projecto5" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <p>API RESTful desenvolvida com Node.js e Express.</p>
-                    <div class="project-tags">
-                        <span class="tag">Node.js</span>
-                        <span class="tag">Express</span>
-                        <span class="tag">MongoDB</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Projecto 6 -->
-            <div class="project-card">
-                <div class="project-image" style="background: linear-gradient(135deg, #7000ff, #00d9ff);">
-                    <span>Dashboard Analytics</span>
-                    <div class="project-overlay">
-                        <a href="https://github.com/projecto6" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="project-info">
-                    <p>Dashboard interactivo com gráficos dinâmicos.</p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Chart.js</span>
-                        <span class="tag">API</span>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </div>
-</section>
+    </section>
+    <!-- Fim da Secção de Certificados e Diplomas -->
 
-    <!-- Contacto -->
-<section id="contact" class="contact">
-    <div class="container">
-        <h2 class="section-title">Contacto</h2>
-        <div class="contact-content">
-            <div class="contact-info">
-                <h3>Vamos trabalhar juntos?</h3>
-                <p>Envia-me uma mensagem!</p>
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>mauricio33ito@gmail.com</span>
+    <!-- Início da Secção de Projectos -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Projectos</h2>
+            <div class="projects-grid">
+
+                <!-- Projecto 1: Website Pessoal (Este Portefólio) -->
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #00d9ff, #7000ff);">
+                        <span>Website Pessoal</span>
+                        <div class="project-overlay">
+                            <a href="https://github.com/mauricito-prog/portfolio-mauricio" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="fab fa-github"></i>
-                        <a href="https://github.com/mauricito-prog" target="_blank">github.com/mauricito-prog</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <a href="https://linkedin.com/in/em construção" target="_blank">linkedin.com/in/em construção</a>
+                    <div class="project-info">
+                        <p>Website responsivo desenvolvido com HTML, CSS e JavaScript.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Projecto 2: Calculadora Python -->
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #7000ff, #00d9ff);">
+                        <span>Calculadora Python</span>
+                        <div class="project-overlay">
+                            <a href="https://github.com/mauricito-prog/Calculadora-simples-Python/blob/main/calculadora.py" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <p>Calculadora simples desenvolvida em Python com interface gráfica.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projecto 3: To-Do List App (TypeScript) -->
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #00d9ff, #7000ff);">
+                        <span>To-Do List App</span>
+                        <div class="project-overlay">
+                            <a href="https://mauricito-prog.github.io/TodoListTS/" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <p>Aplicação de lista de tarefas com TypeScript e armazenamento local.</p>
+                        <div class="project-tags">
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projecto 4: Sistema de Gestão (C#) -->
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #7000ff, #00d9ff);">
+                        <span>Sistema de Gestão</span>
+                        <div class="project-overlay">
+                            <a href="https://github.com/mauricito-prog/SistemaGestao" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <p>Sistema básico de gestão desenvolvido em C# com Windows Forms.</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">.NET</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Projecto 5: Dashboard Analytics (React) -->
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #7000ff, #00d9ff);">
+                        <span>Dashboard Analytics</span>
+                        <div class="project-overlay">
+                            <a href="https://github.com/mauricito-prog/Dashboard-Interativo-em-React.js" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <p>Dashboard interactivo com gráficos dinâmicos.</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Chart.js</span>
+                            <span class="tag">API</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
-            <form class="contact-form" id="contactForm">
-                <div class="form-group">
-                    <input type="text" id="name" name="name" placeholder="Nome" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="E-mail" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="subject" name="subject" placeholder="Assunto" required>
-                </div>
-                <div class="form-group">
-                    <textarea id="message" name="message" rows="5" placeholder="Mensagem" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                    <span class="btn-text">Enviar Mensagem</span>
-                    <span class="btn-loading">A enviar...</span>
-                </button>
-                <div class="form-status" id="formStatus"></div>
-            </form>
         </div>
-    </div>
-</section>
+    </section>
+    <!-- Fim da Secção de Projectos -->
 
-    <!-- Rodapé -->
+    <!-- Início da Secção de Contacto -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="contact-content">
+                <!-- Informações de Contacto -->
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> mauricio33ito@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +351 931 387 811</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Sobralinho, Lisboa, Portugal</p>
+                    <!-- Links para Redes Sociais -->
+                    <div class="social-links">
+                        <a href="https://github.com/mauricito-prog" target="_blank"><i class="fab fa-github"></i></a>
+                        <!-- Adicione outros links sociais aqui, se houver -->
+                    </div>
+                </div>
+                <!-- Formulário de Contacto -->
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Assunto</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                    <!-- Área para exibir o status do formulário (sucesso/erro) -->
+                    <div id="formStatus" class="form-status"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Fim da Secção de Contacto -->
+
+    <!-- Início do Rodapé -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2026 Mauricio Ito. Todos os direitos reservados.</p>
+            <!-- Links para Redes Sociais no Rodapé -->
             <div class="social-links">
-                <a href="github.com/mauricito-prog" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/em construção" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:mauricio33ito@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/mauricito-prog" target="_blank"><i class="fab fa-github"></i></a>
+                <!-- Adicione outros links sociais aqui, se houver -->
             </div>
         </div>
     </footer>
+    <!-- Fim do Rodapé -->
+
+    <!-- Script da biblioteca EmailJS para envio de formulários -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- Link para o arquivo JavaScript principal do projeto -->
     <script src="js/script.js"></script>
 </body>
-
 </html>
-
-
