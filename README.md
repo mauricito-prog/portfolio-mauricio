@@ -1,4 +1,4 @@
-# Portefólio Pessoal - Maurício Ito
+# Portefólio Pessoal - Mauricio Ito
 
 Olá! Bem-vindo ao repositório do meu portefólio pessoal. Este projeto foi desenvolvido para apresentar minhas competências, certificados e projetos como programador iniciante, com foco em desenvolvimento web e programação orientada a objetos.
 
