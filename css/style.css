@@ -521,7 +521,6 @@ body.no-scroll {
 }
 
 /* Efeito ao passar o mouse (desktop) */
-/* Mantemos o hover para desktop, mas o JS vai gerenciar o mobile */
 .certificate-item:hover .certificate-overlay {
     opacity: 1;
     visibility: visible;
@@ -532,7 +531,7 @@ body.no-scroll {
     opacity: 1;
 }
 
-/* Estilos para o estado "ativo" (clicado) - funciona para mobile e desktop */
+/* Estilos para o estado "ativo" no mobile (controlado por JS) */
 .certificate-item.active .certificate-overlay {
     opacity: 1;
     visibility: visible;
@@ -550,35 +549,6 @@ body.no-scroll {
 .certificate-item.active p {
     opacity: 0.2; /* Deixa o conteúdo original mais transparente */
     transition: opacity 0.3s ease;
-}
-
-/* --- NOVO: Estilos para a seta de scroll no carrossel --- */
-.scroll-indicator {
-    display: none; /* Escondido por padrão, só aparece no mobile via JS */
-    position: absolute;
-    bottom: 20px; /* Posição da seta */
-    right: 20px;
-    color: var(--primary);
-    font-size: 1.8rem;
-    animation: scrollWheel 2s infinite ease-in-out; /* Efeito de "roda" */
-    z-index: 10; /* Garante que fique acima de outros elementos */
-    opacity: 0.8;
-}
-
-/* Animação de "roda" para a seta de scroll */
-@keyframes scrollWheel {
-    0% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-5px) rotate(10deg); }
-    50% { transform: translateY(0) rotate(0deg); }
-    75% { transform: translateY(5px) rotate(-10deg); }
-    100% { transform: translateY(0) rotate(0deg); }
-}
-
-/* Media query para mostrar a seta apenas em telas menores */
-@media (max-width: 768px) {
-    .scroll-indicator {
-        display: block; /* Mostra a seta em telas menores */
-    }
 }
 
 
