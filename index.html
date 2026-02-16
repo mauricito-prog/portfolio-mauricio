@@ -221,12 +221,21 @@
 
     <!-- Início da Secção de Certificados e Diplomas -->
     <section id="certificates" class="certificates">
-        <div class="container">
-            <h2 class="section-title">Certificados & Diplomas</h2>
-            <!-- Wrapper para o carrossel de certificados e botões de navegação -->
-            <div class="certificates-wrapper">
-                <button class="carousel-prev cert-btn" id="certPrev"><i class="fas fa-chevron-left"></i></button>
-                <div class="certificates-carousel">
+    <div class="container">
+        <h2 class="section-title">Certificados & Diplomas</h2>
+        <div class="certificates-wrapper">
+            <button class="carousel-prev cert-btn" id="certPrev"><i class="fas fa-chevron-left"></i></button>
+            <div class="certificates-carousel">
+                <!-- Seus itens de certificado aqui -->
+            </div>
+            <button class="carousel-next cert-btn" id="certNext"><i class="fas fa-chevron-right"></i></button>
+            <!-- NOVO: Seta indicadora de scroll para mobile -->
+            <div class="scroll-indicator" id="scrollIndicator">
+                <i class="fas fa-arrow-right"></i> <!-- Ícone de seta para a direita -->
+            </div>
+        </div>
+    </div>
+</section>
                     <!-- Grupo 1: Diploma e Mapa de Aulas -->
                     <div class="certificate-item">
                         <a href="certificados/diploma-analise-desenvolvimento-sistemas-estacio.pdf"
