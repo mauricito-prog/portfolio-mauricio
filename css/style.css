@@ -842,6 +842,26 @@ body.no-scroll {
 
     .certificates-wrapper {
         padding: 0 12px;
+        /* Ajuste para centralizar o carrossel e permitir o scroll sem os botões */
+        justify-content: flex-start; /* Alinha ao início para o scroll manual */
+        gap: 15px; /* Reduz o gap para caber mais na tela */
+    }
+
+    /* Oculta os botões de navegação do carrossel em telas menores */
+    .cert-btn {
+        display: none;
+    }
+
+    /* Ajuste para o item do certificado em telas menores */
+    .certificate-item {
+        min-width: 200px; /* Ajusta a largura mínima para caber melhor */
+        max-width: 200px; /* Mantém a largura máxima para consistência */
+        padding: 20px 10px; /* Reduz o padding */
+    }
+
+    /* Ajuste para o texto do certificado em telas menores */
+    .certificate-item p {
+        font-size: 0.85rem; /* Reduz o tamanho da fonte */
     }
 
     /* Layout de contacto em uma única coluna */
@@ -859,11 +879,12 @@ body.no-scroll {
         grid-template-columns: 1fr; /* 1 coluna para skills em mobile pequeno */
     }
     .certificate-item {
-        min-width: 190px;
-        max-width: 190px;
+        min-width: 180px; /* Reduz ainda mais a largura mínima para telas muito pequenas */
+        max-width: 180px;
     }
+    /* Os botões de navegação do carrossel já estão ocultos em 768px, mas mantemos aqui por clareza */
     .cert-btn {
-        display: none; /* Esconde botões de navegação do carrossel em mobile (usa scroll com o dedo) */
+        display: none;
     }
 }
 
