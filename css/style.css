@@ -1,205 +1,344 @@
-/*
-    Portefólio Pessoal - Maurício
-    Desenvolvido em 2026
-    Tecnologias: HTML, CSS, JavaScript
-*/
-
-/* ========================================
-   RESET E VARIÁVEIS
-   ======================================== */
+/* =========================================
+   RESET & BASE GERAL
+   ========================================= */
+/* Reset de margens e paddings padrão, e box-sizing para facilitar o layout */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Definição de variáveis CSS para cores, tamanhos e transições */
 :root {
-    --primary-color: #00d9ff;
-    --secondary-color: #7000ff;
-    --bg-dark: #0a0a0a;
-    --bg-card: #1a1a1a;
-    --text-primary: #ffffff;
-    --text-secondary: #b0b0b0;
-    --accent-gradient: linear-gradient(135deg, #00d9ff 0%, #7000ff 100%);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --primary: #00d9ff; /* Cor primária (azul ciano) */
+    --secondary: #7000ff; /* Cor secundária (roxo) */
+    --bg: #050509; /* Cor de fundo principal */
+    --bg-soft: #0b0b11; /* Cor de fundo mais suave */
+    --bg-card: #11121a; /* Cor de fundo para cartões */
+    --bg-dark: #050509; /* Cor de fundo escura */
+    --text: #ffffff; /* Cor do texto principal */
+    --muted: #a8b3cf; /* Cor do texto secundário/atenuado */
+    --border-soft: rgba(255, 255, 255, 0.06); /* Borda suave */
+    --radius: 12px; /* Raio de borda padrão */
+    --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.75); /* Sombra suave */
+    --transition: all .3s ease; /* Transição padrão para elementos interativos */
 }
 
+/* Garante que o corpo da página ocupe toda a largura e previne scroll horizontal */
 html, body {
-    overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
+    overflow-x: hidden;
+    scroll-behavior: smooth; /* Rolagem suave ao clicar em links âncora */
 }
 
+/* Estilos base para o corpo da página */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-dark);
-    color: var(--text-primary);
-    line-height: 1.6;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; /* Fonte moderna */
+    background: radial-gradient(circle at top, #151922 0, #050509 50%, #000 100%); /* Gradiente de fundo radial */
+    color: var(--text); /* Cor do texto principal */
+    line-height: 1.6; /* Espaçamento entre linhas */
 }
 
+/* Estilo para o container centralizador de conteúdo */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    max-width: 1100px;
+    margin: 0 auto; /* Centraliza o container */
+    padding: 0 16px; /* Padding lateral para respiro */
 }
 
-/* ========================================
-   NAVBAR
-   ======================================== */
+/* Garante que imagens não excedam seu container e remove espaços extras */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Estilos gerais para todas as secções da página */
+section {
+    padding: 90px 0; /* Padding vertical para espaçamento entre secções */
+    position: relative;
+    z-index: 1; /* Garante que o conteúdo da secção esteja acima de elementos de fundo */
+}
+
+/* Estilo para os títulos de secção */
+.section-title {
+    font-size: 2.4rem;
+    text-align: center;
+    margin-bottom: 55px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary)); /* Gradiente de cor para o texto */
+    -webkit-background-clip: text; /* Recorta o fundo para o texto (WebKit) */
+    background-clip: text; /* Recorta o fundo para o texto */
+    -webkit-text-fill-color: transparent; /* Torna o texto transparente para o gradiente aparecer */
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+/* =========================================
+   NAVBAR (Barra de Navegação)
+   ========================================= */
 .navbar {
-    position: fixed;
+    position: fixed; /* Fixa a navbar no topo da página */
     top: 0;
+    left: 0;
     width: 100%;
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    padding: 1rem 0;
-    box-shadow: 0 2px 20px rgba(0, 217, 255, 0.1);
+    background: linear-gradient(to bottom, rgba(5,5,10,0.98), rgba(5,5,10,0.9)); /* Fundo com gradiente e transparência */
+    backdrop-filter: blur(14px); /* Efeito de desfoque no fundo */
+    border-bottom: 1px solid var(--border-soft); /* Borda inferior suave */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8); /* Sombra para profundidade */
+    z-index: 1000; /* Garante que a navbar esteja sempre no topo */
+    padding: 0.9rem 0;
 }
 
+/* Estilo para o container dentro da navbar */
 .navbar .container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; /* Espaça os itens da navbar */
+    align-items: center; /* Alinha verticalmente os itens */
 }
 
+/* Estilo para o logotipo (se fosse texto) */
 .logo h2 {
-    background: var(--accent-gradient);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
-    font-size: 1.5rem;
-    font-weight: 700;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
 }
 
+/* Estilo para a lista de links de navegação */
 .nav-links {
     display: flex;
-    list-style: none;
-    gap: 2rem;
+    list-style: none; /* Remove marcadores de lista */
+    gap: 2.3rem; /* Espaçamento entre os links */
 }
 
+/* Estilo para cada link individual na navbar */
 .nav-links a {
-    color: var(--text-primary);
-    text-decoration: none;
+    color: var(--muted); /* Cor do texto padrão */
+    text-decoration: none; /* Remove sublinhado */
     font-weight: 500;
-    transition: var(--transition);
+    font-size: 0.98rem;
+    letter-spacing: 0.03em;
     position: relative;
+    padding-bottom: 4px; /* Espaço para a linha de destaque */
+    transition: var(--transition); /* Transição suave para hover */
 }
 
+/* Linha de destaque que aparece ao passar o mouse ou no link ativo */
 .nav-links a::after {
-    content: '';
+    content: "";
     position: absolute;
-    bottom: -5px;
     left: 0;
-    width: 0;
+    bottom: 0;
+    width: 0; /* Largura inicial zero */
     height: 2px;
-    background: var(--accent-gradient);
-    transition: var(--transition);
+    background: linear-gradient(90deg, var(--primary), var(--secondary)); /* Gradiente para a linha */
+    transition: width .25s ease; /* Animação da largura */
+    border-radius: 999px;
 }
 
-.nav-links a:hover::after {
+/* Efeito ao passar o mouse sobre o link */
+.nav-links a:hover {
+    color: #ffffff; /* Cor do texto mais clara */
+}
+
+/* Aumenta a largura da linha de destaque ao passar o mouse ou no link ativo */
+.nav-links a:hover::after,
+.nav-links a.active::after {
     width: 100%;
 }
 
+/* Ícone Hamburger para navegação em dispositivos móveis */
 .hamburger {
-    display: none;
+    display: none; /* Escondido por padrão em desktop */
     flex-direction: column;
-    cursor: pointer;
     gap: 5px;
+    cursor: pointer;
 }
-
 .hamburger span {
-    width: 25px;
+    width: 24px;
     height: 3px;
-    background: var(--primary-color);
+    border-radius: 10px;
+    background: var(--primary);
     transition: var(--transition);
 }
+/* Animação do ícone hamburger quando ativo */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
 
-/* ========================================
-   HERO SECTION
-   ======================================== */
+/* =========================================
+   HERO (Secção de Destaque Inicial)
+   ========================================= */
 .hero {
-    min-height: 100vh;
+    min-height: 100vh; /* Ocupa a altura total da viewport */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 80px;
+    align-items: center; /* Centraliza o conteúdo verticalmente */
     position: relative;
     overflow: hidden;
+    padding-top: 85px; /* Espaço para a navbar fixa */
 }
 
-.hero::before {
-    content: '';
+/* Brilhos de fundo decorativos */
+.hero::before,
+.hero::after {
+    content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%);
-    animation: pulse 4s ease-in-out infinite;
+    border-radius: 50%;
+    filter: blur(90px); /* Efeito de desfoque */
+    opacity: 0.5;
+    z-index: -1; /* Fica atrás do conteúdo */
+}
+.hero::before {
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(0,217,255,0.55), transparent 70%); /* Gradiente azul */
+    top: -80px;
+    left: -100px;
+}
+.hero::after {
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(112,0,255,0.6), transparent 70%); /* Gradiente roxo */
+    bottom: -120px;
+    right: -80px;
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 0.5; }
+/* Conteúdo central da secção Hero */
+.hero-content {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Título principal da secção Hero */
+.hero-content h1 {
+    font-size: 3.8rem;
+    line-height: 1.05;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    margin-bottom: 0.9rem;
+}
+
+.hero-content h1 span {
+    display: inline-block;
+}
+
+/* Destaque para o nome dentro do título */
+.hero-content .name-highlight {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Efeito de glitch (mais suave para leitura) */
+.glitch {
+    position: relative;
+}
+.glitch::before,
+.glitch::after {
+    content: attr(data-text); /* Usa o texto do atributo data-text */
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    mix-blend-mode: screen;
+}
+.glitch::before {
+    transform: translateX(-2px);
+    color: var(--secondary);
+}
+.glitch::after {
+    transform: translateX(2px);
+    color: var(--primary);
+}
+
+/* Subtítulo da secção Hero */
+.hero-content .subtitle {
+    font-size: 1.2rem;
+    color: var(--muted);
+    margin-bottom: 2.4rem;
+}
+
+/* =========================================
+   EFEITO DE DIGITAÇÃO E SALTO NO HERO
+   ========================================= */
+.hero-content h1 {
+    font-size: 3.8rem;
+    line-height: 1.05;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    margin-bottom: 0.9rem;
+    min-height: 4.5rem; /* Garante que o h1 não "encolha" durante a digitação */
+    display: inline-block; /* Para o cursor de digitação */
+    position: relative;
+    color: var(--text); /* Cor inicial do texto */
+}
+
+/* Cursor de digitação */
+.typing-effect::after {
+    content: '|';
+    display: inline-block;
+    animation: blink-caret 0.75s step-end infinite; /* Animação de piscar */
+    color: var(--primary);
+    margin-left: 5px;
+}
+
+/* Animação do cursor de digitação */
+@keyframes blink-caret {
+    from, to { opacity: 0; }
     50% { opacity: 1; }
 }
 
-.hero-content {
-    text-align: center;
-    width: 100%;
-    z-index: 1;
-    padding: 0 20px;
-}
-
-.hero h1 {
-    font-size: 4rem;
-    background: var(--accent-gradient);
+/* Estilo para o nome "Maurício Ito" dentro do h1 */
+.typing-effect .name-highlight {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 1rem;
-    position: relative;
-    line-height: 1.2;
+    -webkit-text-fill-color: transparent;
 }
 
-.hero h1.typed {
-    animation: glow 3s ease-in-out infinite;
-}
-
-@keyframes glow {
+/* Animação de salto e brilho para o texto final após a digitação */
+@keyframes bounceAndGlow {
     0%, 100% {
-        filter: brightness(1) drop-shadow(0 0 5px rgba(0, 217, 255, 0.3));
-        transform: scale(1);
+        transform: translateY(0);
+        text-shadow: 0 0 5px rgba(0, 217, 255, 0.2), 0 0 10px rgba(112, 0, 255, 0.2);
     }
     50% {
-        filter: brightness(1.15) drop-shadow(0 0 15px rgba(0, 217, 255, 0.5));
-        transform: scale(1.02);
+        transform: translateY(-8px); /* Salto */
+        text-shadow: 0 0 15px var(--primary), 0 0 25px var(--secondary), 0 0 40px rgba(0, 217, 255, 0.6); /* Brilho mais intenso */
     }
 }
 
-.subtitle {
-    font-size: 1.5rem;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
-    animation: fadeInUp 1s ease 0.2s both;
+/* Aplica a animação de salto e brilho após a digitação ser finalizada via JS */
+.typing-effect.finished-typing {
+    animation: bounceAndGlow 2s infinite ease-in-out;
 }
 
-.cta-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    animation: fadeInUp 1s ease 0.4s both;
+/* Esconde o cursor de digitação quando a classe 'no-cursor' é adicionada via JS */
+.typing-effect.no-cursor::after {
+    display: none;
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+/* Media query para ajustar o tamanho da fonte em telas menores */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 3rem;
+        min-height: 3.5rem;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+}
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2.4rem;
+        min-height: 2.8rem;
     }
 }
 
@@ -208,7 +347,7 @@ body {
    ======================================== */
 .btn {
     padding: 14px 32px;
-    border-radius: 50px;
+    border-radius: 50px; /* Botões arredondados */
     text-decoration: none;
     font-weight: 600;
     transition: var(--transition);
@@ -221,531 +360,715 @@ body {
     min-width: 180px;
 }
 
+/* Botão primário com gradiente azul-roxo */
 .btn-primary {
     background: linear-gradient(135deg, #00d9ff 0%, #7000ff 100%);
-    color: var(--text-primary);
+    color: var(--text); /* Cor do texto ajustada para contraste */
     box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
 }
 
+/* Efeito hover para o botão primário */
 .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 217, 255, 0.5);
-    background: linear-gradient(135deg, #00ffff 0%, #8000ff 100%);
+    transform: translateY(-3px); /* Leve elevação */
+    box-shadow: 0 10px 30px rgba(0, 217, 255, 0.5); /* Sombra mais intensa */
+    background: linear-gradient(135deg, #00ffff 0%, #8000ff 100%); /* Gradiente ligeiramente alterado */
 }
 
+/* Botão secundário com gradiente roxo-azul */
 .btn-secondary {
-    background: linear-gradient(135deg, #00d9ff 0%, #7000ff 100%);
-    color: var(--text-primary);
+    background: linear-gradient(135deg, #00d9ff 0%, #7000ff 100%); /* Gradiente igual ao primário, mas com hover invertido */
+    color: var(--text); /* Cor do texto ajustada para contraste */
     box-shadow: 0 4px 15px rgba(112, 0, 255, 0.3);
 }
 
+/* Efeito hover para o botão secundário */
 .btn-secondary:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(112, 0, 255, 0.5);
-    background: linear-gradient(135deg, #7000ff 0%, #00d9ff 100%);
+    background: linear-gradient(135deg, #7000ff 0%, #00d9ff 100%); /* Gradiente invertido */
 }
 
-/* ========================================
-   SECÇÕES
-   ======================================== */
-section {
-    padding: 100px 0;
-    width: 100%;
-    overflow-x: hidden;
+/* =========================================
+   SOBRE (Secção "Sobre Mim")
+   ========================================= */
+.about {
+    background: radial-gradient(circle at top, #0d1017 0, #050509 60%, #000 100%); /* Gradiente de fundo */
 }
-
-.section-title {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 3rem;
-    position: relative;
-    display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
-    background: var(--accent-gradient);
-    border-radius: 2px;
-}
-
-/* ========================================
-   SOBRE
-   ======================================== */
 .about-content {
+    display: flex;
+    justify-content: center; /* Centraliza o texto */
+}
+.about-text {
     max-width: 800px;
-    margin: 0 auto;
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.05rem;
+}
+/* Espaçamento entre parágrafos */
+.about-text p + p {
+    margin-top: 0.9rem;
 }
 
-.about-text p {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    line-height: 1.8;
-    text-align: justify;
-}
-
-/* ========================================
-   COMPETÊNCIAS
-   ======================================== */
+/* ========= SKILLS SECTION (NOVO ESTILO) ========= */
 .skills {
-    background: var(--bg-card);
+    background: linear-gradient(to bottom, #050509 0%, #050509 40%, #000 100%); /* Gradiente de fundo */
+    padding-top: 90px;
 }
 
+/* Grid para organizar os cartões de competências */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.skill-card {
-    background: var(--bg-dark);
-    padding: 2rem;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid rgba(0, 217, 255, 0.1);
-    transition: var(--transition);
-}
-
-.skill-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--primary-color);
-    box-shadow: 0 10px 30px rgba(0, 217, 255, 0.2);
-}
-
-.skill-card i {
-    font-size: 3rem;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 1rem;
-}
-
-.skill-card h3 {
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
-}
-
-.skill-bar {
-    background: rgba(255, 255, 255, 0.1);
-    height: 5px;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 1rem;
-}
-
-.skill-progress {
-    height: 100%;
-    background: var(--accent-gradient);
-    border-radius: 10px;
-    width: 0;
-    transition: width 1.5s ease;
-}
-
-/* ========================================
-   PROJECTOS
-   ======================================== */
-.projects {
-    background: var(--bg-dark);
-    padding: 100px 0;
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Colunas responsivas */
+    gap: 30px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
-.project-card {
-    background: var(--bg-card);
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid rgba(0, 217, 255, 0.1);
-    transition: var(--transition);
-}
-
-.project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 217, 255, 0.2);
-}
-
-.project-image {
+/* Estilo para cada cartão de competência */
+.skill-card {
     position: relative;
-    height: 200px;
+    background: #0c0c12;
+    padding: 26px 22px 22px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease,
+                background .25s ease;
+}
+
+/* Efeito de brilho suave abaixo do cartão ao passar o mouse */
+.skill-card::before {
+    content: '';
+    position: absolute;
+    inset: auto 14px -10px;
+    height: 18px;
+    background: radial-gradient(ellipse at center,
+                rgba(0, 217, 255, 0.45) 0,
+                rgba(0, 0, 0, 0) 70%);
+    opacity: 0;
+    transition: opacity .25s ease;
+    pointer-events: none;
+}
+
+/* Efeito hover para o cartão de competência */
+.skill-card:hover {
+    transform: translateY(-10px); /* Elevação */
+    box-shadow: 0 22px 60px rgba(0, 217, 255, 0.25); /* Sombra com cor primária */
+    border-color: rgba(0, 217, 255, 0.4); /* Borda com cor primária */
+    background: #11111a;
+}
+
+/* Mostra o brilho ao passar o mouse */
+.skill-card:hover::before {
+    opacity: 1;
+}
+
+/* Ícone dentro de um "medalhão" circular */
+.skill-card i {
+    font-size: 2.2rem;
+    color: #00d9ff; /* Cor primária para os ícones */
+}
+
+.skill-icon-wrapper {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    background: radial-gradient(circle at 30% 20%, #1f1f2a, #02030a);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    box-shadow: 0 0 25px rgba(0, 217, 255, 0.25);
 }
 
-.project-image span {
-    font-size: 1.5rem;
+/* Título da competência */
+.skill-card h3 {
+    font-size: 1.15rem;
     font-weight: 700;
-    color: var(--text-primary);
-    position: relative;
-    z-index: 1;
+    letter-spacing: 0.02em;
+    color: var(--text); /* Cor do texto principal */
+    margin-bottom: 16px;
 }
 
-.project-overlay {
+/* Container da barra de progresso */
+.skill-bar {
+    background: #050509;
+    height: 9px;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+/* Barra colorida de progresso com gradiente */
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #00d9ff 0%, #7000ff 100%);
+    width: 0;                 /* Largura inicial zero para animação via JS */
+    transition: width 1.5s ease-out; /* Animação da largura */
+    border-radius: inherit;
+    box-shadow: 0 0 12px rgba(0, 217, 255, 0.45);
+}
+
+/* Pequeno "track" preto por cima para detalhe visual */
+.skill-bar::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: inherit;
+    background: #050509;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Media query para ajustar o grid de competências em telas menores */
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* =========================================
+   CERTIFICADOS
+   ========================================= */
+.certificates {
+    background: #050509;
+}
+/* Wrapper para o carrossel e botões de navegação */
+.certificates-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Carrossel de certificados */
+.certificates-carousel {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto; /* Permite rolagem horizontal */
+    scroll-behavior: smooth; /* Rolagem suave */
+    padding: 12px 4px 18px;
+    flex: 1;
+}
+/* Estilo da barra de rolagem do carrossel */
+.certificates-carousel::-webkit-scrollbar {
+    height: 5px;
+}
+.certificates-carousel::-webkit-scrollbar-track {
+    background: #070812;
+}
+.certificates-carousel::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #202438, #3a3f5a);
+    border-radius: 999px;
+}
+
+/* Estilo para cada cartão de certificado */
+.certificate-item {
+    min-width: 230px;
+    max-width: 230px;
+    background: linear-gradient(145deg, #090914, #131525);
+    border-radius: 18px;
+    padding: 16px 14px 18px;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.85);
+    transition: var(--transition);
+    position: relative; /* Essencial para o posicionamento absoluto do overlay */
+}
+
+/* Efeito hover para o cartão de certificado */
+.certificate-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,217,255,0.25);
+    border-color: rgba(0,217,255,0.7);
+}
+
+/* Estilo para o link dentro do cartão de certificado */
+.certificate-link {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* Garante que o link ocupe todo o espaço do item */
+    height: 100%; /* Garante que o link ocupe toda a altura do item */
+    text-align: center; /* Centraliza o texto e ícone */
+    position: relative; /* Para o overlay */
+    z-index: 1; /* Garante que o conteúdo original esteja acima do overlay inicial */
+}
+
+/* Ícone do certificado */
+.certificate-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 30% 20%, #181b2f, #050509);
+    color: var(--primary);
+    font-size: 1.9rem;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.9);
+}
+
+/* Texto do certificado */
+.certificate-item p {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* Botões de navegação lateral do carrossel */
+.cert-btn {
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 1.4rem;
+    padding: 6px 8px;
+    border-radius: 999px;
+    transition: var(--transition);
+    flex-shrink: 0; /* Impede que os botões encolham */
+}
+/* Efeito hover para os botões de navegação */
+.cert-btn:hover {
+    color: #ffffff;
+    background: rgba(0,217,255,0.08);
+    transform: scale(1.08);
+}
+
+/* =========================================
+   CERTIFICADOS - EFEITO "VER" (Overlay)
+   ========================================= */
+.certificate-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.8); /* Fundo escuro para o overlay */
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transition: var(--transition);
-    z-index: 2;
+    color: var(--primary); /* Cor do texto "Ver" */
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 18px; /* Mesma borda do item */
+    opacity: 0; /* Inicialmente invisível */
+    visibility: hidden; /* Esconde completamente para não interferir com cliques */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 2; /* Acima do conteúdo original */
+    cursor: pointer; /* Indica que é clicável */
 }
 
+.certificate-overlay span {
+    transform: translateY(10px); /* Começa um pouco abaixo */
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Efeito ao passar o mouse (desktop) */
+.certificate-item:hover .certificate-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.certificate-item:hover .certificate-overlay span {
+    transform: translateY(0); /* Sobe para a posição normal */
+    opacity: 1;
+}
+
+/* Estilos para o estado "ativo" no mobile (controlado por JS) */
+.certificate-item.active .certificate-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.certificate-item.active .certificate-overlay span {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Opcional: Escurecer o conteúdo original quando o overlay aparece */
+.certificate-item:hover .certificate-icon,
+.certificate-item:hover p,
+.certificate-item.active .certificate-icon,
+.certificate-item.active p {
+    opacity: 0.2; /* Deixa o conteúdo original mais transparente */
+    transition: opacity 0.3s ease;
+}
+
+/* =========================================
+   PROJECTOS
+   ========================================= */
+.projects {
+    background: var(--bg-dark);
+}
+/* Grid para organizar os cartões de projectos */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 colunas em desktop */
+    gap: 24px;
+}
+
+/* Estilo para cada cartão de projecto */
+.project-card {
+    background: linear-gradient(145deg, #070813, #121425);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.04);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition);
+}
+/* Efeito hover para o cartão de projecto */
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,217,255,0.28);
+}
+
+/* "Capa" do projecto com gradiente de fundo */
+.project-image {
+    position: relative;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+}
+
+.project-image span {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/* Overlay com ícone do GitHub */
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(0,217,255,0.18), rgba(0,0,0,0.92));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Invisível por padrão */
+    transition: var(--transition);
+}
+/* Mostra o overlay ao passar o mouse sobre o cartão */
 .project-card:hover .project-overlay {
     opacity: 1;
 }
 
+/* Link do GitHub no overlay */
 .project-link {
-    color: var(--primary-color);
-    font-size: 3.5rem;
+    color: var(--primary);
+    font-size: 3rem;
     text-decoration: none;
     transition: var(--transition);
 }
-
+/* Efeito hover para o link do GitHub */
 .project-link:hover {
-    transform: scale(1.2);
+    transform: scale(1.15);
     color: #00ffff;
 }
 
+/* Informações do projecto (descrição e tags) */
 .project-info {
-    padding: 1.5rem;
+    padding: 1.3rem 1.4rem 1.5rem;
     text-align: center;
 }
-
 .project-info p {
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
     font-size: 0.95rem;
-    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 0.9rem;
 }
-
+/* Tags de tecnologias usadas */
 .project-tags {
     display: flex;
-    gap: 0.5rem;
     flex-wrap: wrap;
+    gap: 0.45rem;
     justify-content: center;
 }
-
 .tag {
-    background: rgba(0, 217, 255, 0.1);
-    color: var(--primary-color);
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    border: 1px solid rgba(0, 217, 255, 0.3);
+    font-size: 0.8rem;
+    border-radius: 999px;
+    padding: 5px 12px;
+    background: rgba(0,217,255,0.08);
+    border: 1px solid rgba(0,217,255,0.35);
+    color: var(--primary);
 }
 
-/* ========================================
+/* =========================================
    CONTACTO
-   ======================================== */
+   ========================================= */
 .contact {
-    background: var(--bg-card);
+    background: radial-gradient(circle at top, #0b0e17 0, #050509 60%, #000 100%);
 }
-
+/* Conteúdo da secção de contacto (informações e formulário) */
 .contact-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
+    grid-template-columns: 1fr 1.5fr; /* Duas colunas */
+    gap: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    background: linear-gradient(145deg, #070813, #121425);
+    border-radius: 22px;
+    padding: 38px 34px;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: var(--shadow-soft);
 }
 
-.contact-info h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-}
-
+/* Informações de contacto (email, telefone, localização) */
 .contact-info p {
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
-}
-
-.contact-details {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.contact-item {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    color: var(--text-secondary);
+    margin-bottom: 12px;
+    color: var(--muted);
+    font-size: 0.98rem;
+}
+.contact-info p i {
+    color: var(--primary);
+    margin-right: 12px;
+    font-size: 1.25rem;
+    width: 26px; /* Garante alinhamento dos ícones */
 }
 
-.contact-item i {
-    color: var(--primary-color);
-    font-size: 1.5rem;
-}
-
-.contact-item a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.contact-item a:hover {
-    color: var(--primary-color);
-}
-
-.contact-form {
+/* Links de redes sociais na secção de contacto */
+.contact-info .social-links {
+    margin-top: 26px;
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    gap: 18px;
 }
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 15px;
-    background: var(--bg-dark);
-    border: 2px solid rgba(0, 217, 255, 0.2);
-    border-radius: 10px;
-    color: var(--text-primary);
-    font-size: 1rem;
-    font-family: inherit;
+.contact-info .social-links a {
+    color: var(--muted);
+    font-size: 1.7rem;
     transition: var(--transition);
 }
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
-}
-
-.contact-form button {
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-loading {
-    display: none;
-}
-
-.contact-form button.loading .btn-text {
-    display: none;
-}
-
-.contact-form button.loading .btn-loading {
-    display: inline;
-}
-
-.form-status {
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    display: none;
-    animation: fadeInUp 0.5s ease;
-}
-
-.form-status.success {
-    background: rgba(0, 255, 0, 0.1);
-    border: 1px solid rgba(0, 255, 0, 0.3);
-    color: #00ff00;
-    display: block;
-}
-
-.form-status.error {
-    background: rgba(255, 0, 0, 0.1);
-    border: 1px solid rgba(255, 0, 0, 0.3);
-    color: #ff0000;
-    display: block;
-}
-
-/* ========================================
-   RODAPÉ
-   ======================================== */
-.footer {
-    background: var(--bg-dark);
-    padding: 2rem 0;
-    text-align: center;
-    border-top: 1px solid rgba(0, 217, 255, 0.1);
-}
-
-.footer p {
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-}
-
-.social-links a {
-    color: var(--text-secondary);
-    font-size: 1.5rem;
-    transition: var(--transition);
-}
-
-.social-links a:hover {
-    color: var(--primary-color);
+/* Efeito hover para os links sociais */
+.contact-info .social-links a:hover {
+    color: var(--primary);
     transform: translateY(-3px);
 }
 
-/* ========================================
-   RESPONSIVO - MOBILE
-   ======================================== */
-@media (max-width: 1024px) {
+/* Formulário de contacto */
+.contact-form .form-group {
+    margin-bottom: 16px;
+}
+.contact-form label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 0.93rem;
+}
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    background: #090a14;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.05);
+    color: var(--text);
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+/* Estilo de foco para inputs e textareas */
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(0,217,255,0.25);
+    outline: none;
+}
+.contact-form textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 110px;
+}
+
+/* Estado do formulário (sucesso/erro) */
+.form-status {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    display: none; /* Escondido por padrão */
+}
+.form-status.success {
+    color: #4caf50; /* Verde para sucesso */
+}
+.form-status.error {
+    color: #ff5252; /* Vermelho para erro */
+}
+
+/* =========================================
+   FOOTER (Rodapé)
+   ========================================= */
+.footer {
+    border-top: 1px solid var(--border-soft);
+    background: #050509;
+    padding: 18px 0 22px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+/* Links de redes sociais no rodapé */
+.footer .social-links {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+.footer .social-links a {
+    color: var(--muted);
+    font-size: 1.25rem;
+    transition: var(--transition);
+}
+/* Efeito hover para os links sociais do rodapé */
+.footer .social-links a:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   RESPONSIVO (Media Queries)
+   ========================================= */
+@media (max-width: 992px) {
+    .skills-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 colunas em tablets maiores */
+    }
     .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 colunas em tablets */
+    }
+    .section-title {
+        font-size: 2.1rem;
     }
 }
 
 @media (max-width: 768px) {
+    /* Navbar em mobile: links se tornam uma coluna lateral */
+    .nav-links {
+        position: absolute;
+        top: 58px;
+        right: 12px;
+        flex-direction: column;
+        background: rgba(5,5,10,0.98);
+        width: 220px;
+        padding: 14px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--border-soft);
+        transform: translateX(120%); /* Escondido por padrão */
+        transition: transform .25s ease;
+    }
+    /* Mostra os links quando a navbar está ativa */
+    .nav-links.active {
+        transform: translateX(0);
+    }
+    /* Mostra o ícone hamburger */
     .hamburger {
         display: flex;
     }
 
-    .nav-links {
-        position: fixed;
-        top: 70px;
-        right: -100%;
-        flex-direction: column;
-        background: rgba(10, 10, 10, 0.98);
-        width: 100%;
-        padding: 2rem;
-        transition: var(--transition);
-        gap: 1rem;
-        z-index: 999;
+    .hero-content h1 {
+        font-size: 3rem;
     }
-
-    .nav-links.active {
-        right: 0;
+    .hero-content {
+        text-align: left; /* Alinha o conteúdo hero à esquerda em mobile */
     }
-
-    .hero h1 {
-        font-size: 2rem;
-        white-space: nowrap;
-    }
-
-    .subtitle {
-        font-size: 1.2rem;
-    }
-
+    /* Botões CTA em coluna */
     .cta-buttons {
         flex-direction: column;
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
-        gap: 1rem;
+        align-items: stretch;
     }
-
     .btn {
         width: 100%;
-        max-width: 100%;
-        padding: 16px 24px;
-        font-size: 1.05rem;
-        background: linear-gradient(135deg, #00d9ff 0%, #7000ff 100%);
-    }
-
-    .btn-primary,
-    .btn-secondary {
-        background: linear-gradient(135deg, #00d9ff 0%, #7000ff 100%);
-    }
-
-    .contact-content {
-        grid-template-columns: 1fr;
-    }
-
-    .section-title {
-        font-size: 2rem;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
+        text-align: center;
     }
 
     .skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 colunas para skills em mobile */
+    }
+    .projects-grid {
+        grid-template-columns: 1fr; /* 1 coluna para projectos em mobile */
+    }
+
+    .certificates-wrapper {
+        padding: 0 12px;
+    }
+
+    /* Layout de contacto em uma única coluna */
+    .contact-content {
         grid-template-columns: 1fr;
+        padding: 26px 22px;
     }
 }
 
 @media (max-width: 480px) {
-    .hero h1 {
-        font-size: 1.6rem;
-        white-space: nowrap;
+    .hero-content h1 {
+        font-size: 2.4rem;
     }
-
-    .subtitle {
-        font-size: 1rem;
+    .skills-grid {
+        grid-template-columns: 1fr; /* 1 coluna para skills em mobile pequeno */
     }
-
-    .btn {
-        padding: 14px 20px;
-        font-size: 1rem;
+    .certificate-item {
+        min-width: 190px;
+        max-width: 190px;
     }
-
-    .project-image {
-        height: 180px;
-    }
-
-    .project-image span {
-        font-size: 1.2rem;
-    }
-
-    .project-link {
-        font-size: 2.5rem;
+    .cert-btn {
+        display: none; /* Esconde botões de navegação do carrossel em mobile (usa scroll com o dedo) */
     }
 }
 
-@media (max-width: 360px) {
-    .hero h1 {
-        font-size: 1.4rem;
-        white-space: nowrap;
-    }
+/* =========================================
+   ESTILOS PARA FOTO DE PERFIL NA NAVBAR
+   ========================================= */
+.profile-photo-wrapper {
+    width: 45px; /* Tamanho da área da foto */
+    height: 45px;
+    border-radius: 50%; /* Deixa a foto circular */
+    overflow: hidden; /* Garante que a imagem não saia da borda circular */
+    border: 2px solid var(--primary); /* Borda com a cor primária */
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.4); /* Sombra suave */
+    display: flex; /* Para centralizar a imagem dentro do wrapper */
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Necessário para o efeito de ampliação */
+    z-index: 1001; /* Garante que a foto ampliada fique acima de outros elementos da navbar */
+}
 
-    .subtitle {
-        font-size: 0.95rem;
+.profile-photo-wrapper:hover {
+    transform: scale(2.0); /* Amplia a foto em 100% (dobra o tamanho) ao passar o mouse */
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.9); /* Sombra mais intensa e visível */
+}
+
+.profile-photo-wrapper img {
+    width: 100%; /* A imagem preenche o wrapper */
+    height: 100%;
+    object-fit: contain; /* Garante que a imagem inteira seja visível. Pode deixar espaços. */
+    /* Se object-fit: contain deixar espaços e você não gostar,
+       volte para object-fit: cover e tente ajustar object-position: center top;
+       ou prepare a imagem com mais margem. */
+    display: block; /* Remove espaços extras que podem aparecer */
+}
+
+/* Ajuste para o alinhamento da navbar com a foto */
+.navbar .container {
+    align-items: center; /* Garante que a foto e os links fiquem alinhados verticalmente */
+}
+
+/* Opcional: Ajustar o tamanho da foto em telas menores se necessário */
+@media (max-width: 768px) {
+    .profile-photo-wrapper {
+        width: 40px;
+        height: 40px;
+    }
+    /* Para evitar que a foto ampliada saia muito da tela em mobile, podemos limitar o scale */
+    .profile-photo-wrapper:hover {
+        transform: scale(1.5); /* Amplia um pouco menos em telas menores */
     }
 }
 
-/* Landscape (horizontal) no mobile */
-@media (max-height: 500px) and (orientation: landscape) {
-    .hero {
-        min-height: auto;
-        padding: 100px 20px 60px;
-    }
-
-    .hero h1 {
-        font-size: 1.8rem;
-        white-space: nowrap;
-    }
-
-    .subtitle {
-        font-size: 1rem;
-    }
-
-    .btn {
-        padding: 12px 24px;
-        font-size: 0.95rem;
-    }
-
-    .cta-buttons {
-        flex-direction: row;
-        max-width: 100%;
-    }
+/* ========================================
+   NAVBAR SCROLLED STATE (adicional)
+   ======================================== */
+/* Estilos aplicados à navbar quando a página é rolada (controlado por JS) */
+.navbar.scrolled {
+    background: rgba(10, 10, 10, 0.98); /* Fundo mais escuro */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.6); /* Sombra mais sutil */
+    border-bottom-color: rgba(255, 255, 255, 0.1); /* Borda mais visível */
 }
-
