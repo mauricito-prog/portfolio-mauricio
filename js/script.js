@@ -291,11 +291,10 @@ if (certificatesCarousel && certPrev && certNext) {
 }
 
 // ========================================
-// EFEITO "VER" EM CERTIFICADOS (MOBILE E DESKTOP) & INDICADOR DE SCROLL
+// EFEITO "VER" EM CERTIFICADOS (MOBILE E DESKTOP)
 // ========================================
 const certificateItems = document.querySelectorAll('.certificate-item');
 // A variável 'certificatesCarousel' já foi declarada acima, então não a redeclaramos aqui.
-// Removido scrollIndicator pois não está no HTML e não é essencial para a funcionalidade principal.
 
 const isTouchDevice =
     'ontouchstart' in window ||
@@ -303,48 +302,84 @@ const isTouchDevice =
     navigator.msMaxTouchPoints > 0;
 
 if (certificateItems.length > 0) {
-    if (isTouchDevice) {
-        let activeCertificate = null;
+    let activeCertificateTimeout = null; // Variável para armazenar o timeout do certificado ativo
 
-        certificateItems.forEach(item => {
-            // Usamos 'click' para o primeiro toque/clique no mobile
-            // Isso garante que o overlay só apareça ao interagir intencionalmente
-            item.addEventListener('click', (e) => {
-                // Se já houver outro ativo e não for este, fecha o anterior
-                if (activeCertificate && activeCertificate !== item) {
-                    activeCertificate.classList.remove('active');
-                    activeCertificate = null;
+    certificateItems.forEach(item => {
+        // Adiciona um listener de clique para todos os dispositivos
+        item.addEventListener('click', (e) => {
+            // Se for um dispositivo touch OU se o item já estiver ativo (para desktop, um segundo clique)
+            if (isTouchDevice || item.classList.contains('active')) {
+                // Se já houver um timeout ativo, limpa-o para evitar conflitos
+                if (activeCertificateTimeout) {
+                    clearTimeout(activeCertificateTimeout);
+                    activeCertificateTimeout = null;
                 }
 
-                // Se este já estiver ativo, é o segundo clique: deixa o link funcionar normalmente
+                // Se o item já estiver ativo, significa que é o segundo clique (ou um clique em desktop)
+                // e o usuário quer realmente abrir o link.
                 if (item.classList.contains('active')) {
-                    activeCertificate = null;
-                    // O evento de clique padrão do <a> vai acontecer
+                    // Permite que o evento padrão do link ocorra
+                    return;
                 } else {
-                    // Primeiro clique: só mostra o overlay e bloqueia a navegação
+                    // Primeiro clique em mobile: mostra o overlay e impede a navegação imediata
                     e.preventDefault(); // Impede que o link abra no primeiro clique
-                    item.classList.add('active');
-                    activeCertificate = item;
-                }
-            });
+                    item.classList.add('active'); // Ativa o overlay
 
-            // Fecha o overlay clicando fora
+                    // Define um timeout para remover a classe 'active' após 3 segundos
+                    activeCertificateTimeout = setTimeout(() => {
+                        item.classList.remove('active');
+                        activeCertificateTimeout = null; // Limpa a referência do timeout
+                    }, 3000); // 3000 milissegundos = 3 segundos
+                }
+            }
+            // Para desktop, o CSS com :hover já cuida do efeito ao passar o mouse.
+            // O clique normal em desktop deve abrir o link diretamente, o que é o comportamento padrão do <a>.
+            // A lógica acima garante que em desktop, se o item já estiver ativo (o que não deve acontecer com hover),
+            // ou se for um clique normal, o link funcione.
+        });
+
+        // Adiciona um listener para o caso de o usuário clicar fora do certificado ativo em mobile
+        if (isTouchDevice) {
             document.addEventListener('click', (e) => {
-                if (activeCertificate && !activeCertificate.contains(e.target)) {
-                    activeCertificate.classList.remove('active');
-                    activeCertificate = null;
+                // Se houver um certificado ativo e o clique não foi nele
+                if (item.classList.contains('active') && !item.contains(e.target)) {
+                    item.classList.remove('active'); // Remove o overlay
+                    if (activeCertificateTimeout) {
+                        clearTimeout(activeCertificateTimeout); // Limpa o timeout se o usuário fechar manualmente
+                        activeCertificateTimeout = null;
+                    }
                 }
             });
-        });
-
-        // Removida a lógica do scrollIndicator, pois o elemento não existe no HTML fornecido.
-        // Se você quiser um indicador de scroll, precisará adicioná-lo ao HTML.
-
-    } else {
-        // Desktop: hover + clique normal
-        certificateItems.forEach(item => {
-            item.classList.add('no-touch');
-        });
-        // Removida a lógica do scrollIndicator, pois o elemento não existe no HTML fornecido.
-    }
+        }
+    });
 }
+
+// ========================================
+// EFEITO DE ZOOM NA FOTO DE PERFIL (MOBILE E DESKTOP)
+// ========================================
+const profilePhotoWrapper = document.querySelector('.profile-photo-wrapper');
+
+if (profilePhotoWrapper) {
+    const isTouchDevice =
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0;
+
+    if (isTouchDevice) {
+        // Para dispositivos touch: zoom ao clicar
+        profilePhotoWrapper.addEventListener('click', (e) => {
+            e.stopPropagation(); // Impede que o clique se propague para o documento
+            profilePhotoWrapper.classList.toggle('active'); // Ativa/desativa a classe 'active'
+        });
+
+        // Fecha o zoom ao clicar fora da imagem
+        document.addEventListener('click', (e) => {
+            if (profilePhotoWrapper.classList.contains('active') && !profilePhotoWrapper.contains(e.target)) {
+                profilePhotoWrapper.classList.remove('active');
+            }
+        });
+    }
+    // Para desktop, o CSS com :hover já cuida do efeito.
+    // Não precisamos de JS adicional para desktop aqui.
+}
+        
