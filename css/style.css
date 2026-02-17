@@ -904,21 +904,25 @@ body.no-scroll {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative; /* Necessário para o efeito de ampliação */
     z-index: 1001; /* Garante que a foto ampliada fique acima de outros elementos da navbar */
+    cursor: pointer; /* Indica que é clicável/interativo */
 }
 
-.profile-photo-wrapper:hover {
-    transform: scale(2.0); /* Amplia a foto em 100% (dobra o tamanho) ao passar o mouse */
-    box-shadow: 0 0 20px rgba(0, 217, 255, 0.9); /* Sombra mais intensa e visível */
-}
-
+/* Estilo para a imagem dentro do wrapper */
 .profile-photo-wrapper img {
     width: 100%; /* A imagem preenche o wrapper */
     height: 100%;
-    object-fit: contain; /* Garante que a imagem inteira seja visível. Pode deixar espaços. */
-    /* Se object-fit: contain deixar espaços e você não gostar,
-       volte para object-fit: cover e tente ajustar object-position: center top;
-       ou prepare a imagem com mais margem. */
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer, cortando se necessário */
     display: block; /* Remove espaços extras que podem aparecer */
+    transition: transform 0.3s ease; /* Adiciona transição para o zoom da imagem */
+}
+
+/* Efeito de ampliação ao passar o mouse (desktop) ou ao estar ativo (mobile) */
+.profile-photo-wrapper:hover,
+.profile-photo-wrapper.active { /* Adicionamos a classe .active para o JS controlar o clique */
+    transform: scale(2.0); /* Amplia a foto em 100% (dobra o tamanho) */
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.9); /* Sombra mais intensa e visível */
+    /* Ajuste a origem da transformação para o centro para um zoom mais natural */
+    transform-origin: center center;
 }
 
 /* Ajuste para o alinhamento da navbar com a foto */
@@ -932,8 +936,14 @@ body.no-scroll {
         width: 40px;
         height: 40px;
     }
-    /* Para evitar que a foto ampliada saia muito da tela em mobile, podemos limitar o scale */
+    /* Em telas menores, desativamos o hover para evitar conflito com o clique */
     .profile-photo-wrapper:hover {
-        transform: scale(1.5); /* Amplia um pouco menos em telas menores */
+        transform: none; /* Remove o efeito de hover em mobile */
+        box-shadow: 0 0 10px rgba(0, 217, 255, 0.4); /* Volta à sombra normal */
+    }
+    /* O efeito de clique (.active) ainda funcionará com o JS */
+    .profile-photo-wrapper.active {
+        transform: scale(2.0); /* Mantém o zoom de 2x para o clique em mobile */
+        box-shadow: 0 0 20px rgba(0, 217, 255, 0.9);
     }
 }
