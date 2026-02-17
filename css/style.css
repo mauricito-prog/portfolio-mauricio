@@ -579,6 +579,7 @@ body.no-scroll {
     overflow: hidden;
     box-shadow: var(--shadow-soft);
     transition: var(--transition);
+    position: relative; /* Importante para posicionar o vídeo */
 }
 /* Efeito hover para o cartão de projecto */
 .project-card:hover {
@@ -594,11 +595,45 @@ body.no-scroll {
     align-items: center;
     justify-content: center;
     color: var(--text);
+    /* Adicionado para transição suave do background */
+    transition: background 0.3s ease;
 }
 
-.project-image span {
+/* Texto do título do projeto */
+.project-image .project-title-text { /* Use a nova classe */
     font-size: 1.3rem;
     font-weight: 700;
+    position: absolute; /* Para que o texto não empurre o vídeo */
+    z-index: 2; /* Acima do vídeo, mas abaixo do overlay */
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Estilo para o vídeo do projeto */
+.project-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que o vídeo preencha o espaço */
+    border-radius: 18px; /* Borda arredondada como o card */
+    opacity: 0; /* Inicialmente invisível */
+    transition: opacity 0.3s ease;
+    z-index: 1; /* Abaixo do texto e do overlay */
+}
+
+/* Efeito ao passar o mouse sobre o cartão */
+.project-card:hover .project-image {
+    background: transparent; /* Remove o gradiente de fundo ao hover */
+}
+
+.project-card:hover .project-title-text {
+    opacity: 0; /* Esconde o texto do título ao hover */
+}
+
+.project-card:hover .project-video {
+    opacity: 1; /* Mostra o vídeo ao hover */
 }
 
 /* Overlay com ícone do GitHub */
@@ -611,6 +646,7 @@ body.no-scroll {
     justify-content: center;
     opacity: 0; /* Invisível por padrão */
     transition: var(--transition);
+    z-index: 3; /* Acima do vídeo e do texto */
 }
 /* Mostra o overlay ao passar o mouse sobre o cartão */
 .project-card:hover .project-overlay {
@@ -963,5 +999,59 @@ body.no-scroll {
     .profile-photo-wrapper.active {
         transform: scale(2.0); /* Mantém o zoom de 2x para o clique em mobile */
         box-shadow: 0 0 20px rgba(0, 217, 255, 0.9);
+    }
+}
+/* =========================================
+   BOTÃO FLUTUANTE DO WHATSAPP
+   ========================================= */
+.whatsapp-float {
+    position: fixed;
+    width: 55px;
+    height: 55px;
+    bottom: 30px;
+    right: 30px;
+
+    /* Estilo alinhado ao portfólio */
+    background: radial-gradient(circle at 30% 20%, #181b2f, #050509);
+    border: 1px solid rgba(0,217,255,0.5);        /* borda com a cor primária */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);    /* sombra similar aos cards */
+
+    border-radius: 50%;
+    color: var(--primary);                        /* ícone na cor primária */
+    text-align: center;
+    font-size: 28px;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* sensação de “glass”/neon */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.whatsapp-float i {
+    /* leve brilho no ícone */
+    text-shadow: 0 0 10px rgba(0,217,255,0.5);
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 25px rgba(0,217,255,0.35);
+    border-color: rgba(112,0,255,0.8);           /* puxa para o roxo secundário */
+    color: #00ffff;                              /* fica um ciano mais forte no hover */
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 24px;
     }
 }
