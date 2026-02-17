@@ -412,6 +412,9 @@ body.no-scroll {
     gap: 20px;
     padding: 10px 0;
     scrollbar-width: none; /* Esconde a barra de rolagem para Firefox */
+    /* Indicação visual de scroll com gradiente nas bordas */
+    mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
 }
 /* Esconde a barra de rolagem para WebKit (Chrome, Safari) */
 .certificates-carousel::-webkit-scrollbar {
@@ -482,6 +485,9 @@ body.no-scroll {
     border-radius: 999px;
     transition: var(--transition);
     flex-shrink: 0; /* Impede que os botões encolham */
+    display: flex; /* Garante que os ícones fiquem centralizados */
+    align-items: center;
+    justify-content: center;
 }
 /* Efeito hover para os botões de navegação */
 .cert-btn:hover {
@@ -840,16 +846,18 @@ body.no-scroll {
         grid-template-columns: 1fr; /* 1 coluna para projectos em mobile */
     }
 
+    /* --- Ajustes para o carrossel de certificados no mobile --- */
     .certificates-wrapper {
-        padding: 0 12px;
-        /* Ajuste para centralizar o carrossel e permitir o scroll sem os botões */
-        justify-content: flex-start; /* Alinha ao início para o scroll manual */
-        gap: 15px; /* Reduz o gap para caber mais na tela */
+        padding: 0 8px; /* Reduz o padding lateral para dar mais espaço */
+        justify-content: center; /* Centraliza o conteúdo, incluindo as setas */
+        gap: 8px; /* Reduz o espaço entre os itens e as setas */
     }
 
-    /* Oculta os botões de navegação do carrossel em telas menores */
+    /* As setas (cert-btn) agora são visíveis no mobile */
     .cert-btn {
-        display: none;
+        display: flex; /* Garante que os botões sejam exibidos */
+        font-size: 1.2rem; /* Reduz o tamanho do ícone da seta */
+        padding: 4px 6px; /* Torna o botão mais compacto */
     }
 
     /* Ajuste para o item do certificado em telas menores */
@@ -863,6 +871,8 @@ body.no-scroll {
     .certificate-item p {
         font-size: 0.85rem; /* Reduz o tamanho da fonte */
     }
+    /* --- Fim dos ajustes para o carrossel de certificados no mobile --- */
+
 
     /* Layout de contacto em uma única coluna */
     .contact-content {
@@ -878,14 +888,22 @@ body.no-scroll {
     .skills-grid {
         grid-template-columns: 1fr; /* 1 coluna para skills em mobile pequeno */
     }
+
+    /* --- Ajustes adicionais para o carrossel de certificados em telas muito pequenas --- */
+    .certificates-wrapper {
+        gap: 6px; /* Reduz ainda mais o gap */
+    }
+
+    .cert-btn {
+        font-size: 1rem; /* Ícones ainda menores */
+        padding: 3px 5px; /* Botões ainda mais compactos */
+    }
+
     .certificate-item {
         min-width: 180px; /* Reduz ainda mais a largura mínima para telas muito pequenas */
         max-width: 180px;
     }
-    /* Os botões de navegação do carrossel já estão ocultos em 768px, mas mantemos aqui por clareza */
-    .cert-btn {
-        display: none;
-    }
+    /* --- Fim dos ajustes adicionais para o carrossel de certificados --- */
 }
 
 /* =========================================
