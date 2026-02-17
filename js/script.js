@@ -382,4 +382,27 @@ if (profilePhotoWrapper) {
     // Para desktop, o CSS com :hover já cuida do efeito.
     // Não precisamos de JS adicional para desktop aqui.
 }
-        
+// ========================================
+// ANIMAÇÃO DE VÍDEO NOS PROJETOS AO HOVER
+// ========================================
+const projectCards = document.querySelectorAll('.project-card');
+
+if (projectCards.length > 0) {
+    projectCards.forEach(card => {
+        const video = card.querySelector('.project-video');
+
+        if (video) {
+            // Ao passar o mouse sobre o cartão
+            card.addEventListener('mouseenter', () => {
+                video.currentTime = 0; // Reinicia o vídeo
+                video.play();          // Inicia a reprodução
+            });
+
+            // Ao tirar o mouse do cartão
+            card.addEventListener('mouseleave', () => {
+                video.pause();         // Pausa o vídeo
+                video.currentTime = 0; // Volta para o início (opcional, mas bom para consistência)
+            });
+        }
+    });
+}
